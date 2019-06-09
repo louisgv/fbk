@@ -1,13 +1,44 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {Text} from 'ink';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { Box, Color, Text } from "ink";
 
-/// Get all feedback given
-const Hello = ({name}) => <Text>Hello, {name}</Text>;
+import { LoginInput } from "../components/LoginInput";
 
-Hello.propTypes = {
-	/// Name of the person to get feedback from
-	name: PropTypes.string.isRequired
+import { gun, isUserNotExist, signup, isUserExist, getFbAlias } from "../core/api";
+
+/// Signup for fbk
+const FeedbackSignup = () => {
+	const [status, setStatus] = useState("");
+
+	return (
+		<Box flexDirection="column">
+			<LoginInput
+				onUsername={async username => {
+					if (await isUserExist(username)){
+						setStatus(
+							`User ${username} exist. Please login with: npx fbk login`
+							);
+						process.exit(1);
+					}
+				}}
+				onSubmit={async ({ username, password }) => {
+					const ack = await signup(username, password);
+					setStatus(JSON.stringify(ack || {}));
+					process.exit(0);
+				}}
+			/>
+			<Color bold>{status}</Color>
+		</Box>
+	);
 };
 
-export default Hello;
+// FeedbackSignup.propTypes = {
+// };
+
+// FeedbackSignup.shortFlags = {
+// };
+
+// FeedbackSignup.defaultProps = {
+// };
+
+export default FeedbackSignup;

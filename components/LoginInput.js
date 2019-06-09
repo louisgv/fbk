@@ -3,7 +3,10 @@ import { Box } from "ink";
 
 import { LabeledTextInput } from "../components/LabeledTextInput";
 
-export const LoginInput = ({ onUsername = () => {}, onSubmit = () => {} }) => {
+export const LoginInput = ({
+	onUsername = async () => {},
+	onSubmit = () => {}
+}) => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 
@@ -16,8 +19,8 @@ export const LoginInput = ({ onUsername = () => {}, onSubmit = () => {} }) => {
 				value={username}
 				onChange={setUsername}
 				onSubmit={async () => {
-					await onUsername(username)
-					setShowPasswordInput(true)
+					await onUsername(username);
+					setShowPasswordInput(true);
 				}}
 			/>
 
