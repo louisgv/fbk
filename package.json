@@ -1,0 +1,27 @@
+{
+	"name": "fbk",
+	"version": "0.0.1",
+	"license": "MIT",
+	"bin": "./build/cli.js",
+	"engines": {
+		"node": ">=8"
+	},
+	"scripts": {
+		"dev": "pastel dev",
+		"build": "pastel build",
+		"prepare": "pastel build"
+	},
+	"files": [
+		"build"
+	],
+	"dependencies": {
+		"gun": "^0.2019.515",
+		"ink": "^2.2.0",
+		"ink-select-input": "^3.1.1",
+		"ink-tab": "^2.1.2",
+		"ink-text-input": "^3.2.0",
+		"pasteljs": "^1.0.2",
+		"prop-types": "^15.7.2",
+		"react": "^16.8.6"
+	}
+}
