@@ -2,6 +2,22 @@
 
 > Use fbk to send feedback to someone.
 
+## Zero-install usage
+
+### Signup:
+```bash
+npx fbk signup
+```
+
+### Send feedback:
+```bash
+npx fbk to user2
+```
+
+### Read feedback:
+```bash
+npx fbk from user1
+```
 
 ## Install
 
@@ -13,15 +29,21 @@ $ npm install fbk
 ## CLI
 
 ```
-$ fbk --help
+$ npx fbk --help
 fbk
 
-Hello world command
+Send feedback to your peer
+
+Commands:
+  fbk from <sender>            Get feedback
+  fbk                          Send feedback to your peer [default]
+  fbk login                    Login to fbk
+  fbk signup                   Signup for fbk
+  fbk to <recipent> <message>  Send feedback
 
 Options:
-
-	--name  Name of the person to greet           [string]
-```
+  --help     Show help                                    [boolean]
+  --version  Show version number                          [boolean]```
 
 
 ## Development

@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { Box, Color, Text } from "ink";
 
 
-/// Get all feedback given
+/// Send feedback to your peer
 const FeedbackMain = () => {
-	const [status, setStatus] = useState("Feedback");
+	const [status, setStatus] = useState("Help? fbk --help");
 	return (
 		<Box flexDirection="column">
 			<Color bold>{status}</Color>
