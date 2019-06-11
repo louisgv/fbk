@@ -1,17 +1,25 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Box, Color, Text } from "ink";
+import { Box, Color } from "ink";
 
 import { LoginInput } from "../components/LoginInput";
 
-import { gun, isUserExist, user, login, getFbName } from "../core/api";
+import { isUserExist, login } from "../core/api";
+import { useLogState } from "../core/utils";
 
 /// Login to fbk
 const FeedbackLogin = () => {
-	const [status, setStatus] = useState("");
+	const [
+		status,
+		setStatus,
+		statusColor,
+		setStatusColor
+	] = useLogState("status", "getting credential . . .", "green");
 
 	return (
 		<Box flexDirection="column">
+			<Color keyword={statusColor} bold>{status}</Color>
+
 			<LoginInput
 				onUsername={async username => {
 					if (!(await isUserExist(username))) {
@@ -22,12 +30,16 @@ const FeedbackLogin = () => {
 					}
 				}}
 				onSubmit={async ({ username, password }) => {
-					const ack = await login(username, password);
-					setStatus(JSON.stringify(ack));
+					try {
+						await login(username, password);
+						setStatus('Success');
+					} catch (error) {
+						setStatusColor('red')
+						setStatus(error)
+					}
 					process.exit(0);
 				}}
 			/>
-			<Color bold>{status}</Color>
 		</Box>
 	);
 };

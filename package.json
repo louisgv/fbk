@@ -15,6 +15,11 @@
 		"build"
 	],
 	"dependencies": {
+		"@stablelib/base64": "^0.7.2",
+		"@stablelib/nacl": "^0.10.2",
+		"@stablelib/random": "^0.7.2",
+		"@stablelib/utf8": "^0.10.1",
+		"fs-extra": "^8.0.1",
 		"gun": "^0.2019.515",
 		"ink": "^2.2.0",
 		"ink-select-input": "^3.1.1",
@@ -22,6 +27,7 @@
 		"ink-text-input": "^3.2.0",
 		"pasteljs": "^1.0.2",
 		"prop-types": "^15.7.2",
-		"react": "^16.8.6"
+		"react": "^16.8.6",
+		"uuid": "^3.3.2"
 	}
 }
