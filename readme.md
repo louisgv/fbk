@@ -11,7 +11,7 @@ npx fbk signup
 
 ### Send feedback:
 ```bash
-npx fbk to user2
+npx fbk to user2 'I think you need to go out and get some fresh air.'
 ```
 
 ### Read feedback:
