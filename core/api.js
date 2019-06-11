@@ -109,41 +109,38 @@ export const giveFeedback = async ({ to, data }) => {
 		getPubKey(to)
 	]);
 
-	const toUser = gun.user(toUserPubRaw.substring(1))
+	const toUser = gun.user(toUserPubRaw.substring(1));
 
 	await auth(username, password);
-
-	const feedbackId = uuid();
 
 	const feedbackFromTo = user
 		.get("feedback")
 		.get("to")
 		.get(to);
 
-	await feedbackFromTo
-		.get(feedbackId)
-		.put(data)
-		.once()
-		.then();
-
+	feedbackFromTo.set(data);
 	feedbackFromTo.grant(toUser);
 };
 
-export const readFeedback = async ({ from }) => {
+export const readFeedback = async ({ from, onData }) => {
 	if (!(await isUserExist(from)))
 		throw new Error(`User ${from} does not exist!`);
 
-	const { username, password } = await readCredential();
+	const [{ username, password }, fromUserPubRaw] = await Promise.all([
+		readCredential(),
+		getPubKey(from)
+	]);
+
+	const fromUser = gun.user(fromUserPubRaw.substring(1));
 
 	await auth(username, password);
 
-	const data = gun
-		.get(`~@${from}`)
+	fromUser
 		.get("feedback")
 		.get("to")
 		.get(username)
-		.once()
-		.then();
+		.map()
+		.on(onData);
 };
 
 export const getPubKey = username =>

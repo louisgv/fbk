@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { Box, Color, Text } from "ink";
+import { Box, Color } from "ink";
 
 import { LoginInput } from "../components/LoginInput";
 
-import { gun, isUserNotExist, signup, isUserExist, getFbAlias } from "../core/api";
+import { signup, isUserExist } from "../core/api";
 
 /// Signup for fbk
 const FeedbackSignup = () => {

@@ -5,7 +5,7 @@ import { Box, Color } from "ink";
 import { useLogState } from "../core/utils";
 import { giveFeedback } from "../core/api";
 
-/// Login to fbk
+/// Send feedback
 const FeedbackTo = ({ recipent, message }) => {
 	const [status, setStatus, statusColor, setStatusColor] = useLogState(
 		"status",
@@ -48,8 +48,8 @@ const FeedbackTo = ({ recipent, message }) => {
 };
 
 FeedbackTo.propTypes = {
-	recipent: PropTypes.string,
-	message: PropTypes.string
+	recipent: PropTypes.string.isRequired,
+	message: PropTypes.string.isRequired
 };
 
 // FeedbackTo.defaultProps = {
