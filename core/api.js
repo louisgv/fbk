@@ -25,7 +25,10 @@ export const gun = Gun({
 	peers: ["https://guttural-chartreuse.glitch.me/gun"]
 });
 
+gun.get('dream-store')
+
 export const user = gun.user();
+
 const aliasPrefix = "fbk-";
 export const getFbName = name => `${aliasPrefix}${name}`;
 export const getFbAlias = name => `~@${getFbName(name)}`;
