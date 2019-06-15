@@ -38,7 +38,6 @@ const initGun = promise =>
 		promise,
 		gun
 			.get("dream-store")
-			.once()
 			.then()
 	]);
 
