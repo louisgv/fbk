@@ -16,16 +16,16 @@ require("gun/lib/then.js");
 
 const fbkPath = `${os.homedir()}/.fbk`;
 const fbkFilePath = {
+	data: `${fbkPath}/data`,
 	credential: `${fbkPath}/credential.json`
 };
 
 const newNonce = () => randomBytes(SECRETBOX_NONCE_LENGTH);
 
 export const gun = Gun({
+	file: fbkFilePath.storage,
 	peers: ["https://guttural-chartreuse.glitch.me/gun"]
 });
-
-gun.get('dream-store')
 
 export const user = gun.user();
 
@@ -33,18 +33,29 @@ const aliasPrefix = "fbk-";
 export const getFbName = name => `${aliasPrefix}${name}`;
 export const getFbAlias = name => `~@${getFbName(name)}`;
 
+const initGun = promise =>
+	Promise.all([
+		promise,
+		gun
+			.get("dream-store")
+			.once()
+			.then()
+	]);
+
 const createUser = (username, password) =>
-	new Promise(res => user.create(getFbName(username), password, res));
+	initGun(new Promise(res => user.create(getFbName(username), password, res)));
 
 const auth = (username, password) =>
-	new Promise((resolve, reject) =>
-		user.auth(getFbName(username), password, ack => {
-			if (ack.err) {
-				return reject(ack.err);
-			}
+	initGun(
+		new Promise((resolve, reject) =>
+			user.auth(getFbName(username), password, ack => {
+				if (ack.err) {
+					return reject(ack.err);
+				}
 
-			resolve(ack);
-		})
+				resolve(ack);
+			})
+		)
 	);
 
 const writeCredential = async (username, password, pin = [2, 0, 3, 4]) => {
