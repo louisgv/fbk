@@ -23,7 +23,7 @@ const fbkFilePath = {
 const newNonce = () => randomBytes(SECRETBOX_NONCE_LENGTH);
 
 export const gun = Gun({
-	file: fbkFilePath.storage,
+	file: fbkFilePath.data,
 	peers: ["https://guttural-chartreuse.glitch.me/gun"]
 });
 
