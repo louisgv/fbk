@@ -167,7 +167,6 @@ export const getPubKey = username =>
 export const getData = async id =>
 	gun
 		.get(id)
-		.once()
 		.then();
 
 export const isValid = async id => undefined !== (await getData(id));
